@@ -19,4 +19,3 @@
     $app = new StartApplication($router, $_SERVER['REQUEST_URI'] ?? '/');
 
     $app->run();
-

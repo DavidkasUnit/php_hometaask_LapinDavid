@@ -17,6 +17,9 @@ class Rendering{
         $smarty->setConfigDir('templates/config');
         $smarty->setCompileDir('templates/compile');
         $smarty->setCacheDir('templates/cache');
-        $smarty->testInstall();
+//        $smarty->testInstall();
+        $smarty->assign($data);
+        $smarty->display('index.tpl');
+
     }
 }
