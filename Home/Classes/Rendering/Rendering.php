@@ -1,25 +1,26 @@
 <?php
 
+/**
+ * Class Rendering
+ * @package Phpcourse\Myproject\Classes\Rendering
+ */
+
 namespace Phpcourse\Myproject\Classes\Rendering;
 
+use Latte\Engine;
 use Phpcourse\Myproject\Classes\Traits\DebugTrait;
-use Smarty;
+use Phpcourse\Myproject\Classes\Traits\MonologTrait;
 
 class Rendering{
-    use DebugTrait;
+    use DebugTrait, MonologTrait; // використовуємо трейти для налагодження та логування
     public function __construct(array $data){
-        foreach ($data as $key => $value){
-            //echo $key . ' = ' . $value . '<br>';
-            self::debugConsole($key . ' = ' . $value . '<br>');
-        }
-        $smarty = new Smarty();
-        $smarty->setTemplateDir('templates/1');
-        $smarty->setConfigDir('templates/config');
-        $smarty->setCompileDir('templates/compile');
-        $smarty->setCacheDir('templates/cache');
-//        $smarty->testInstall();
-        $smarty->assign($data);
-        $smarty->display('index.tpl');
+
+        self::debugConsole($data); // викликаємо метод debugConsole() з трейту DebugTrait
+        self::debugLog($data); // викликаємо метод debugLog() з трейту MonologTrait
+
+        $latte = new Engine(); // створюємо об'єкт класу Latte\Engine
+
+        $latte->render('templates/default/index.latte', $data); // відображаємо шаблон
 
     }
 }
